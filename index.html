@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TI Community - Crypto & Investing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="img/logo.png" />
+<meta property="og:title" content="TI Community - Crypto & Investing" />
+<meta property="og:image" content="img/logo.png" />
+<meta property="og:description" content="Cập nhật giá coin, biểu đồ, tin tức và tín hiệu futures với độ chính xác 70%" />
+
+  <style>
+    /* Fear & Greed Index Styles */
+/* Fear & Greed Index Styles */
+#fearGreedBox {
+  background-color: #1a1a1a;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 40px auto; /* Center horizontally */
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  display: flex; /* Use flexbox to center content */
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Ensure text is centered */
+}
+
+#fearGreedBox:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  transform: translateY(-3px);
+}
+
+#fearGreedBox h3 {
+  color: #FFD700;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#fearGreedBox h3 i {
+  animation: pulse 2s infinite;
+}
+
+#fngScore {
+  text-align: center;
+  color: #eee;
+}
+
+#fngScore div {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FFD700;
+  margin-bottom: 10px;
+}
+
+#fngScore p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+/* Coin Calculator Styles */
+#calculator {
+  background-color: #1a1a1a;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 40px auto; /* Center horizontally */
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  display: flex; /* Use flexbox to center content */
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Ensure text is centered */
+}
+
+#calculator:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  transform: translateY(-3px);
+}
+
+#calculator h3 {
+  color: #FFD700;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#calculator h3 i {
+  animation: pulse 2s infinite;
+}
+
+#calculator input, #calculator select {
+  width: 100%; /* Full width for consistency */
+  max-width: 300px; /* Limit width to match search input */
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #FFD700;
+  border-radius: 8px;
+  background-color: #111;
+  color: #FFD700;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#calculator input:focus, #calculator select:focus {
+  outline: none;
+  border-color: #FFEA00;
+  box-shadow: 0 0 10px #FFEA00;
+}
+
+#calculator button {
+  background-color: #FFD700;
+  color: #000;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#calculator button:hover {
+  background-color: #FFEA00;
+  transform: scale(1.05);
+}
+
+#result {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #eee;
+  line-height: 1.5;
+  max-width: 300px; /* Match input width */
+}
+
+#result strong {
+  color: #FFD700;
+}
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0a0a0a;
+      color: #FFD700;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 1400px;
+      margin: auto;
+      position: relative;
+    }
+
+    .logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .slogan {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .btn-discord {
+      background-color: #FFD700;
+      color: #000;
+      font-weight: bold;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .membership-box {
+      background-color: #0d0d0d;
+      border: 2px solid #FFD700;
+      border-radius: 16px;
+      padding: 30px 20px;
+      margin: 40px auto;
+      max-width: 800px;
+      color: #fff;
+      box-shadow:
+        0 0 5px #FFD700,
+        0 0 10px #FFD700,
+        0 0 20px #FFD700,
+        0 0 40px #FFEA00;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .membership-box h2 {
+      color: #FFD700;
+      margin-bottom: 10px;
+    }
+
+    .membership-box p {
+      margin-bottom: 25px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+    .membership-box:hover {
+      box-shadow:
+        0 0 10px #FFD700,
+        0 0 20px #FFD700,
+        0 0 40px #FFD700,
+        0 0 60px #FFEA00;
+    }
+
+    /* Search Input */
+    .coin-search {
+      margin-bottom: 15px;
+    }
+    .coin-search input {
+      width: 300px;
+      max-width: 80%;
+      padding: 8px 12px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .pricing-table {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .plan {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      width: 180px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .plan:hover {
+      transform: scale(1.05);
+    }
+
+    .plan h3 {
+      color: #FFD700;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .plan .price {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .plan.highlight {
+      border-color: #FFD700;
+      background-color: #222;
+    }
+
+    .section-title {
+      color: #FFD700;
+      margin: 60px 0 20px;
+      font-size: 2rem;
+    }
+
+    .coin-table {
+      width: 100%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.95rem;
+    }
+
+    .coin-table th, .coin-table td {
+      padding: 10px;
+      border-bottom: 1px solid #333;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .coin-table th {
+      background-color: #111;
+      color: #FFD700;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .coin-table td {
+      color: #eee;
+    }
+
+    .coin-table img {
+      width: 20px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* Hover effect for entire row */
+    .coin-table tbody tr:hover {
+      background-color: rgba(255, 215, 0, 0.1);
+    }
+
+    .scroll-box {
+      max-height: 600px;
+      overflow-y: auto;
+      border: 1px solid #333;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    #chart-container {
+      height: 500px;
+      margin-top: 40px;
+    }
+
+    footer {
+      margin: 60px 0 20px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* News Feed Styles */
+    .news-feed {
+      max-width: 800px;
+      margin: 30px auto 60px;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      color: #eee;
+      box-shadow: 0 0 10px #FFD700;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    .news-item {
+      display: flex;
+      gap: 15px;
+      border-bottom: 1px solid #333;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .news-item:hover {
+      background-color: #333;
+    }
+
+    .news-item img {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .news-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .news-title {
+      font-weight: 700;
+      color: #FFD700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .news-source-time {
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+
+    /* Loading Spinner Styles */
+    .spinner {
+      border: 4px solid rgba(255, 215, 0, 0.2);
+      border-top: 4px solid #FFD700;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Back to Top Button */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn-discord {
+        width: 90%;
+      }
+
+      .coin-table {
+        font-size: 0.8rem;
+      }
+
+      .news-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .news-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .news-content {
+        text-align: center;
+      }
+    }
+
+    .search-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.search-input {
+  width: 300px;
+  max-width: 90%;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 2px solid #FFD700;
+  background-color: #111;
+  color: #FFD700;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #FFEA00;
+  box-shadow: 0 0 10px #FFEA00;
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.membership-info {
+  background-color: #111;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 550px;
+  margin: 40px auto;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.membership-info:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  transform: translateY(-3px);
+}
+
+.membership-info h3 {
+  color: #FFD700;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.membership-info h3 i {
+  animation: pulse 2s infinite;
+}
+
+.membership-info ul {
+  list-style: none;
+  padding-left: 0;
+  color: #ccc;
+}
+
+.membership-info ul li {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.membership-info ul li:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+  color: #FFD700;
+}
+
+.membership-info ul li i {
+  color: #FFD700;
+  min-width: 20px;
+}
+
+/* Icon pulse effect */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="img/logo.png" alt="TI Logo" class="logo" />
+    <h1>TI Community</h1>
+    <div class="slogan">BE SMART, STAY STRONG</div>
+    <a href="#" class="btn-discord">Join us on Discord</a>
+
+    <div class="membership-box">
+      <h2>🎉 Trở thành hội viên TI Community!</h2>
+      <p>Nhận tín hiệu futures với độ chính xác lên đến <b>70%</b> với chỉ <strong>13K/tháng</strong> – cơ hội để bạn bứt phá trong thế giới Trading & Investing!</p>
+      <div class="pricing-table">
+        <div class="plan highlight">
+          <h3>6 Tháng</h3>
+          <p class="price">79K</p>
+          <p>Tiết kiệm 17%!</p>
+        </div>
+        <div class="plan">
+          <h3>1 Năm</h3>
+          <p class="price">149K</p>
+          <p>Tiết kiệm 40%!</p>
+        </div>
+<!-- Thêm dòng sau vào <head> nếu chưa có Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div class="membership-info">
+  <h3><i class="fas fa-crown"></i> Quyền lợi thành viên gói Premium</h3>
+  <ul>
+    <li><i class="fas fa-bolt"></i> Tín hiệu futures chính xác đến 70%</li>
+    <li><i class="fas fa-newspaper"></i> Cập nhật tin nóng thị trường nhanh nhất</li>
+    <li><i class="fas fa-user-shield"></i> Hỗ trợ tư vấn 1-1 qua Telegram</li>
+    <li><i class="fas fa-chart-line"></i> Phân tích kỹ thuật hàng ngày từ chuyên gia</li>
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <!-- Search Box for Coins -->
+<div class="search-container">
+  <input type="text" id="coinSearch" class="search-input" placeholder="🔍 Tìm kiếm coin..." />
+</div>
+
+    <h2 class="section-title">Top 100 Cryptocurrencies</h2>
+    <div class="scroll-box">
+      <table class="coin-table" id="coinTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Coin</th>
+            <th>Price</th>
+            <!-- Added title for tooltip -->
+            <th title="Giá thay đổi trong 24 giờ qua">24h Change</th>
+            <th>Market Cap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5"><div class="spinner"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Modal chi tiết coin -->
+<div id="coinDetailModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:9999; overflow:auto; padding:30px;">
+  <div style="max-width:900px; background:#111; margin:auto; padding:20px; border-radius:10px; color:#FFD700;">
+    <button onclick="closeModal()" style="float:right; background:#FFD700; color:#000; border:none; border-radius:5px; padding:5px 10px; cursor:pointer;">Đóng</button>
+    <h2 id="coinTitle"></h2>
+    <img id="coinImage" src="" alt="" style="width:40px; vertical-align:middle;" />
+    <div>
+      <label>Chọn thời gian: </label>
+      <select id="chartRange" onchange="loadChartData()">
+        <option value="7">7 ngày</option>
+        <option value="30">30 ngày</option>
+        <option value="365">1 năm</option>
+      </select>
+    </div>
+    <canvas id="coinChart" height="200"></canvas>
+
+    <div style="margin-top:20px;">
+      <h3>Thông tin cơ bản</h3>
+      <ul id="coinStats" style="list-style:none; padding:0;"></ul>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h3>Tin tức liên quan</h3>
+      <div id="coinNews" style="color:#ccc;">Đang tải...</div>
+    </div>
+  </div>
+</div>
+
+    <h2 class="section-title">Live Chart</h2>
+    <div id="chart-container">
+      <div id="tradingview_chart"></div>
+    </div>
+    <div class="feature-card" id="calculator">
+  <h3>💰 Coin Calculator</h3>
+  <input type="number" id="amount" placeholder="Nhập số tiền (USD)" min="0" />
+  <select id="coin">
+    <option value="bitcoin">BTC</option>
+    <option value="ethereum">ETH</option>
+    <option value="solana">SOL</option>
+  </select>
+  <button onclick="calculateCoin()">Tính toán</button>
+  <div id="result"></div>
+</div>
+<div id="fearGreedBox">
+  <h3>🧠 Fear & Greed Index</h3>
+  <div id="fngScore"></div>
+</div>
+    <h2 class="section-title">Latest Crypto News</h2>
+    <div class="news-feed" id="newsFeed">
+      <div class="spinner"></div>
+    </div>
+
+    <footer>© 2025 TI Community</footer>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop">&#8679;</button>
+
+  <!-- TradingView -->
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    let currentWidget;
+
+    function loadChart(symbol) {
+      if (currentWidget) {
+        currentWidget.remove();
+      }
+
+      currentWidget = new TradingView.widget({
+        width: "100%",
+        height: 500,
+        symbol: `BINANCE:${symbol}USDT`,
+        interval: "30",
+        timezone: "Etc/UTC",
+        theme: "dark",
+        style: "1",
+        locale: "en",
+        container_id: "tradingview_chart"
+      });
+    }
+
+    async function loadCoinPrices() {
+      const tableBody = document.querySelector("#coinTable tbody");
+      tableBody.innerHTML = `<tr><td colspan="5"><div class="spinner"></div></td></tr>`;
+
+      try {
+        const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false");
+        const coins = await res.json();
+
+        const rows = coins.map((coin, index) => `
+          <tr data-symbol="${coin.symbol.toUpperCase()}">
+            <td>${index + 1}</td>
+            <td><img src="${coin.image}" alt="${coin.name}" /> ${coin.name}</td>
+            <td>$${coin.current_price.toLocaleString()}</td>
+            <td style="color: ${coin.price_change_percentage_24h >= 0 ? '#0f0' : '#f00'};">
+              ${coin.price_change_percentage_24h.toFixed(2)}%
+            </td>
+            <td>$${coin.market_cap.toLocaleString()}</td>
+          </tr>
+        `).join("");
+
+        tableBody.innerHTML = rows;
+
+        // Add click event to each row to update chart
+        document.querySelectorAll("#coinTable tbody tr").forEach(row => {
+          row.addEventListener("click", () => {
+            const symbol = row.getAttribute("data-symbol");
+            loadChart(symbol);
+          });
+        });
+
+        // Load default chart (top coin)
+        if (coins.length > 0) {
+          loadChart(coins[0].symbol.toUpperCase());
+        }
+      } catch (error) {
+        tableBody.innerHTML = `<tr><td colspan="5">Failed to load data.</td></tr>`;
+        console.error("Coin load error:", error);
+      }
+      
+    }
+
+    async function loadCryptoNews() {
+      const newsContainer = document.getElementById("newsFeed");
+      newsContainer.innerHTML = `<div class="spinner"></div>`;
+
+      try {
+        const res = await fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN");
+        const data = await res.json();
+
+        if (data.Type !== 100 || !data.Data || data.Data.length === 0) {
+          newsContainer.innerHTML = "<p>No news available at the moment.</p>";
+          return;
+        }
+
+        // Get 10 latest news items
+        const newsItems = data.Data.slice(0, 10);
+
+        newsContainer.innerHTML = newsItems.map(item => {
+          const date = new Date(item.published_on * 1000);
+          const formattedDate = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+          return `
+            <a href="${item.url}" target="_blank" class="news-item" rel="noopener noreferrer">
+              <img src="${item.imageurl || 'https://cryptocompare.com/media/37746251/btc.png'}" alt="${item.title}" />
+              <div class="news-content">
+                <div class="news-title">${item.title}</div>
+                <div class="news-source-time">${item.source} • ${formattedDate}</div>
+              </div>
+            </a>
+          `;
+        }).join("");
+      } catch (err) {
+        newsContainer.innerHTML = "<p>Failed to load news.</p>";
+        console.error("News load error:", err);
+      }
+    }
+
+    // Filter coins by search query
+ function filterCoins() {
+  const filterValue = document.getElementById("coinSearch").value.toLowerCase();
+  const rows = document.querySelectorAll("#coinTable tbody tr");
+  rows.forEach(row => {
+    const coinName = row.cells[1]?.textContent.toLowerCase();
+    if (coinName.includes(filterValue)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+}
+
+
+    document.getElementById("coinSearch").addEventListener("input", filterCoins);
+
+    // Back to Top button functionality
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({top: 0, behavior: "smooth"});
+    });
+
+    // Load coins and news on page load
+    window.onload = () => {
+      loadCoinPrices();
+      loadCryptoNews();
+    };
+    document.getElementById("coinSearch").addEventListener("input", filterCoins);
+// 1. Tổng Market Cap
+  async function loadMarketCap() {
+    const res = await fetch("https://api.coingecko.com/api/v3/global");
+    const data = await res.json();
+    const totalMarketCap = data.data.total_market_cap.usd;
+    const el = document.createElement("div");
+    el.style.margin = "20px auto";
+    el.style.color = "#FFD700";
+    el.style.fontSize = "1rem";
+    el.innerHTML = `<strong>🌍 Tổng giá trị thị trường Crypto: $${totalMarketCap.toLocaleString()}</strong>`;
+    document.querySelector(".container").insertBefore(el, document.querySelector(".membership-box"));
+  }
+
+// 3. Thông báo khi giá tăng mạnh (Price Alert Toast)
+const toastContainer = document.createElement("div");
+toastContainer.style.position = "fixed";
+toastContainer.style.bottom = "80px";
+toastContainer.style.left = "50%";
+toastContainer.style.transform = "translateX(-50%)";
+toastContainer.style.display = "flex";
+toastContainer.style.flexDirection = "column-reverse"; // Toast mới ở dưới
+toastContainer.style.alignItems = "center";
+toastContainer.style.gap = "10px";
+toastContainer.style.zIndex = 10000;
+document.body.appendChild(toastContainer);
+
+function showToast(msg) {
+  const toast = document.createElement("div");
+  toast.textContent = msg;
+  toast.style.backgroundColor = "#FFD700";
+  toast.style.color = "#000";
+  toast.style.padding = "10px 20px";
+  toast.style.borderRadius = "30px";
+  toast.style.fontWeight = "bold";
+  toast.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
+  toast.style.transition = "opacity 0.5s ease";
+  toast.style.opacity = "1";
+
+  toastContainer.appendChild(toast);
+
+  // Tự động xóa sau 8 giây
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    setTimeout(() => toast.remove(), 500);
+  }, 3000);
+}
+
+
+  // Gọi lại loadCoinPrices và gắn Toast nếu coin tăng > 10%
+  async function loadCoinPrices() {
+    const tableBody = document.querySelector("#coinTable tbody");
+    tableBody.innerHTML = `<tr><td colspan="5"><div class="spinner"></div></td></tr>`;
+    try {
+      const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false");
+      const coins = await res.json();
+      const rows = coins.map((coin, index) => {
+        const percent = coin.price_change_percentage_24h;
+        if (percent >= 10) {
+          showToast(`🚀 ${coin.name} tăng ${percent.toFixed(2)}%!`);
+        }
+        return `
+          <tr data-symbol="${coin.symbol.toUpperCase()}">
+            <td>${index + 1}</td>
+            <td><img src="${coin.image}" alt="${coin.name}" /> ${coin.name}</td>
+            <td>$${coin.current_price.toLocaleString()}</td>
+            <td style="color: ${percent >= 0 ? '#0f0' : '#f00'};">
+              ${percent.toFixed(2)}%
+            </td>
+            <td>$${coin.market_cap.toLocaleString()}</td>
+          </tr>
+        `;
+      }).join("");
+
+      tableBody.innerHTML = rows;
+
+      // Add click chart
+      document.querySelectorAll("#coinTable tbody tr").forEach(row => {
+        row.addEventListener("click", () => {
+          const symbol = row.getAttribute("data-symbol");
+          loadChart(symbol);
+        });
+      });
+
+      if (coins.length > 0) loadChart(coins[0].symbol.toUpperCase());
+
+    } catch (error) {
+      tableBody.innerHTML = `<tr><td colspan="5">Failed to load data.</td></tr>`;
+    }
+  }
+
+  // 4. Lọc coin theo tăng/giảm
+  const sortBtn = document.createElement("button");
+  sortBtn.textContent = "🔻 Lọc coin giảm giá";
+  sortBtn.style.margin = "10px";
+  sortBtn.style.padding = "10px 15px";
+  sortBtn.style.borderRadius = "20px";
+  sortBtn.style.border = "none";
+  sortBtn.style.background = "#FFD700";
+  sortBtn.style.cursor = "pointer";
+  document.querySelector(".search-container").appendChild(sortBtn);
+
+  let showingDecliners = false;
+  sortBtn.addEventListener("click", async () => {
+    showingDecliners = !showingDecliners;
+    sortBtn.textContent = showingDecliners ? "🔺 Xem tất cả coin" : "🔻 Lọc coin giảm giá";
+    await loadCoinPricesFiltered(showingDecliners);
+  });
+
+  async function loadCoinPricesFiltered(declinersOnly) {
+    const tableBody = document.querySelector("#coinTable tbody");
+    tableBody.innerHTML = `<tr><td colspan="5"><div class="spinner"></div></td></tr>`;
+    try {
+      const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false");
+      const coins = await res.json();
+      const filtered = declinersOnly ? coins.filter(c => c.price_change_percentage_24h < 0) : coins;
+      const rows = filtered.map((coin, index) => `
+        <tr data-symbol="${coin.symbol.toUpperCase()}">
+          <td>${index + 1}</td>
+          <td><img src="${coin.image}" alt="${coin.name}" /> ${coin.name}</td>
+          <td>$${coin.current_price.toLocaleString()}</td>
+          <td style="color: ${coin.price_change_percentage_24h >= 0 ? '#0f0' : '#f00'};">
+            ${coin.price_change_percentage_24h.toFixed(2)}%
+          </td>
+          <td>$${coin.market_cap.toLocaleString()}</td>
+        </tr>
+      `).join("");
+      tableBody.innerHTML = rows;
+    } catch (e) {
+      tableBody.innerHTML = "<tr><td colspan='5'>Error loading.</td></tr>";
+    }
+  }
+
+  // 5. Countdown cập nhật lại
+  const countdownEl = document.createElement("div");
+  countdownEl.style.margin = "10px";
+  countdownEl.style.fontSize = "0.9rem";
+  countdownEl.style.color = "#ccc";
+  document.querySelector(".scroll-box").appendChild(countdownEl);
+
+  let countdown = 60;
+  setInterval(() => {
+    countdown--;
+    if (countdown <= 0) {
+      loadCoinPrices();
+      countdown = 60;
+    }
+    countdownEl.textContent = `🔄 Dữ liệu sẽ cập nhật sau ${countdown}s`;
+  }, 1000);
+
+  // Gọi hàm khởi tạo
+  loadMarketCap();
+  fetch('https://api.alternative.me/fng/?limit=7')
+    .then(res => res.json())
+    .then(data => {
+      const today = data.data[0];
+      const value = today.value;
+      const classification = today.value_classification;
+
+      const emoji = {
+        "Extreme Fear": "😱",
+        "Fear": "😨",
+        "Neutral": "😐",
+        "Greed": "😏",
+        "Extreme Greed": "😈"
+      };
+
+      document.getElementById("fngScore").innerHTML = `
+        <div style="font-size:2rem;">${emoji[classification]} ${value}/100</div>
+        <p style="color:gray;">${classification}</p>
+        <p style="font-size:0.8rem;">Updated: ${today.timestamp}</p>
+      `;
+    });
+    async function calculateCoin() {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const coin = document.getElementById("coin").value;
+
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`);
+    const data = await res.json();
+    const price = data[coin].usd;
+
+    const quantity = amount / price;
+
+    document.getElementById("result").innerHTML = `
+      🪙 Với $${amount} bạn mua được: <strong>${quantity.toFixed(6)}</strong> ${coin.toUpperCase()}
+      <br>💵 Giá hiện tại: $${price.toLocaleString()}
+    `;
+  }
+  let chartInstance = null;
+let selectedCoinId = "";
+
+async function showCoinDetail(coinId, name, imageUrl) {
+  selectedCoinId = coinId;
+  document.getElementById("coinTitle").innerText = name;
+  document.getElementById("coinImage").src = imageUrl;
+  document.getElementById("coinDetailModal").style.display = "block";
+
+  await loadChartData();
+  await loadCoinStats();
+  await loadCoinNews();
+}
+
+function closeModal() {
+  document.getElementById("coinDetailModal").style.display = "none";
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+}
+
+async function loadChartData() {
+  const days = document.getElementById("chartRange").value;
+  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${selectedCoinId}/market_chart?vs_currency=usd&days=${days}`);
+  const data = await res.json();
+
+  const labels = data.prices.map(p => new Date(p[0]).toLocaleDateString());
+  const prices = data.prices.map(p => p[1]);
+
+  const ctx = document.getElementById("coinChart").getContext("2d");
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Giá USD',
+        data: prices,
+        borderColor: '#FFD700',
+        backgroundColor: 'rgba(255,215,0,0.2)',
+        fill: true,
+        tension: 0.3
+      }]
+    },
+    options: {
+      scales: {
+        x: { ticks: { color: '#FFD700' } },
+        y: { ticks: { color: '#FFD700' } }
+      },
+      plugins: {
+        legend: { labels: { color: '#FFD700' } }
+      }
+    }
+  });
+}
+
+async function loadCoinStats() {
+  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${selectedCoinId}`);
+  const coin = await res.json();
+  const ul = document.getElementById("coinStats");
+  ul.innerHTML = `
+    <li>💰 Giá hiện tại: $${coin.market_data.current_price.usd.toLocaleString()}</li>
+    <li>📈 Market Cap: $${coin.market_data.market_cap.usd.toLocaleString()}</li>
+    <li>🔁 Volume (24h): $${coin.market_data.total_volume.usd.toLocaleString()}</li>
+    <li>🔄 Circulating Supply: ${coin.market_data.circulating_supply.toLocaleString()}</li>
+    <li>🧾 Max Supply: ${coin.market_data.max_supply ? coin.market_data.max_supply.toLocaleString() : 'Không giới hạn'}</li>
+  `;
+}
+
+async function loadCoinNews() {
+  const res = await fetch(`https://min-api.cryptocompare.com/data/v2/news/?categories=${selectedCoinId}&lang=EN`);
+  const data = await res.json();
+  const container = document.getElementById("coinNews");
+
+  if (!data.Data || data.Data.length === 0) {
+    container.innerHTML = "Không có tin tức.";
+    return;
+  }
+
+  container.innerHTML = data.Data.slice(0, 5).map(item => `
+    <div style="margin-bottom:10px;">
+      <a href="${item.url}" target="_blank" style="color:#FFD700;">${item.title}</a><br/>
+      <small style="color:#888;">${item.source} - ${new Date(item.published_on * 1000).toLocaleDateString()}</small>
+    </div>
+  `).join("");
+}
+const tr = document.createElement("tr");
+tr.addEventListener("click", () => showCoinDetail(coin.id, coin.name, coin.image));
+
+  </script>
+
+</body>
+</html>
